@@ -3,112 +3,103 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
-    public int width = 21;
-    public int height = 21;
+    // Generates a maze as a 2D int array.
+    // 0 = wall, 1 = floor/path
+    // Entrance is always at (1,1)
+    // Exit cell is always at (width-2, height-2)
 
-    private int[,] maze;
-
-    private List<Vector2Int> frontier = new List<Vector2Int>();
-
-    public int[,] GenerateMaze()
+    public int[,] Generate(int width, int height)
     {
-        maze = new int[width, height];
+        // Prim's algorithm requires odd dimensions
+        if (width  % 2 == 0) width++;
+        if (height % 2 == 0) height++;
 
-        // inicialitzar tot com mur
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                maze[x, y] = 0;
-            }
-        }
+        int[,] maze = new int[width, height];
+        // Everything starts as wall (0) — no need to fill, C# initialises to 0
 
-        // cel·la inicial
-        int startX = Random.Range(1, width - 1);
-        int startY = Random.Range(1, height - 1);
+        // --- Start Prim from (1,1) ---
+        maze[1, 1] = 1;
 
-        maze[startX, startY] = 1;
-
-        AddFrontier(startX, startY);
+        List<Vector2Int> frontier = new List<Vector2Int>();
+        AddFrontier(maze, frontier, 1, 1, width, height);
 
         while (frontier.Count > 0)
         {
-            int randIndex = Random.Range(0, frontier.Count);
-            Vector2Int cell = frontier[randIndex];
-            frontier.RemoveAt(randIndex);
+            // Pick a random frontier cell
+            int idx  = Random.Range(0, frontier.Count);
+            Vector2Int cell = frontier[idx];
+            frontier.RemoveAt(idx);
 
-            List<Vector2Int> neighbors = GetVisitedNeighbors(cell);
+            // Get its already-visited neighbours (2 steps away)
+            List<Vector2Int> visited = GetVisitedNeighbors(maze, cell, width, height);
 
-            if (neighbors.Count == 1)
+            // Only connect if exactly one visited neighbour (Prim's condition)
+            if (visited.Count >= 1)
             {
-                Vector2Int neighbor = neighbors[0];
+                // Pick one visited neighbour at random to connect to
+                Vector2Int neighbor = visited[Random.Range(0, visited.Count)];
 
-                int wallX = (cell.x + neighbor.x) / 2;
-                int wallY = (cell.y + neighbor.y) / 2;
-
+                // Carve: mark the cell and the wall between them as floor
+                int midX = (cell.x + neighbor.x) / 2;
+                int midY = (cell.y + neighbor.y) / 2;
                 maze[cell.x, cell.y] = 1;
-                maze[wallX, wallY] = 1;
+                maze[midX, midY]     = 1;
 
-                AddFrontier(cell.x, cell.y);
+                // Expand frontier from the newly carved cell
+                AddFrontier(maze, frontier, cell.x, cell.y, width, height);
             }
         }
+
+        // --- Guarantee exit cell is open ---
+        int ex = width  - 2;
+        int ey = height - 2;
+        maze[ex, ey] = 1;
+
+        // Make sure at least one neighbour of the exit is also open so it's reachable
+        if (maze[ex - 1, ey] == 0 && maze[ex, ey - 1] == 0)
+            maze[ex - 1, ey] = 1; // open the west wall
 
         return maze;
     }
 
-    void AddFrontier(int x, int y)
+    // -------------------------------------------------------
+    // Adds unvisited cells 2 steps away to the frontier list
+    private void AddFrontier(int[,] maze, List<Vector2Int> frontier,
+                              int x, int y, int width, int height)
     {
-        Vector2Int[] directions =
-        {
-            new Vector2Int(2,0),
-            new Vector2Int(-2,0),
-            new Vector2Int(0,2),
-            new Vector2Int(0,-2)
-        };
+        int[,] dirs = { {2,0},{-2,0},{0,2},{0,-2} };
 
-        foreach (var dir in directions)
+        for (int i = 0; i < 4; i++)
         {
-            int nx = x + dir.x;
-            int ny = y + dir.y;
+            int nx = x + dirs[i, 0];
+            int ny = y + dirs[i, 1];
 
-            if (IsInside(nx, ny) && maze[nx, ny] == 0)
+            // Must be inside the inner grid (not on the border ring)
+            if (nx > 0 && ny > 0 && nx < width - 1 && ny < height - 1 && maze[nx, ny] == 0)
             {
-                Vector2Int newCell = new Vector2Int(nx, ny);
-
-                if (!frontier.Contains(newCell))
-                    frontier.Add(newCell);
+                var v = new Vector2Int(nx, ny);
+                if (!frontier.Contains(v))
+                    frontier.Add(v);
             }
         }
     }
 
-    List<Vector2Int> GetVisitedNeighbors(Vector2Int cell)
+    // Returns already-visited cells 2 steps away (value == 1)
+    private List<Vector2Int> GetVisitedNeighbors(int[,] maze, Vector2Int cell,
+                                                  int width, int height)
     {
-        List<Vector2Int> neighbors = new List<Vector2Int>();
+        var result = new List<Vector2Int>();
+        int[,] dirs = { {2,0},{-2,0},{0,2},{0,-2} };
 
-        Vector2Int[] directions =
+        for (int i = 0; i < 4; i++)
         {
-            new Vector2Int(2,0),
-            new Vector2Int(-2,0),
-            new Vector2Int(0,2),
-            new Vector2Int(0,-2)
-        };
+            int nx = cell.x + dirs[i, 0];
+            int ny = cell.y + dirs[i, 1];
 
-        foreach (var dir in directions)
-        {
-            int nx = cell.x + dir.x;
-            int ny = cell.y + dir.y;
-
-            if (IsInside(nx, ny) && maze[nx, ny] == 1)
-            {
-                neighbors.Add(new Vector2Int(nx, ny));
-            }
+            if (nx > 0 && ny > 0 && nx < width - 1 && ny < height - 1 && maze[nx, ny] == 1)
+                result.Add(new Vector2Int(nx, ny));
         }
 
-        return neighbors;
-    }
-
-    bool IsInside(int x, int y)
-    {
-        return x > 0 && y > 0 && x < width - 1 && y < height - 1;
+        return result;
     }
 }
