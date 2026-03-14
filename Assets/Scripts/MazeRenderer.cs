@@ -162,7 +162,7 @@ public class MazeRenderer : MonoBehaviour
     }
 
     // Move the main camera to look down at the maze
-    void PositionCamera()
+    /*void PositionCamera() // This works fine in PC
     {
         Camera cam = Camera.main;
         if (cam == null) return;
@@ -173,5 +173,30 @@ public class MazeRenderer : MonoBehaviour
 
         cam.transform.position = new Vector3(cx, dist * 0.85f, cz - dist * 0.15f);
         cam.transform.LookAt(new Vector3(cx, 0, cz));
+    }*/
+    // Positions the camera directly overhead so the full maze fits on screen.
+    // Works correctly on both portrait mobile and landscape PC screens.
+    void PositionCamera()
+    {
+        Camera cam = Camera.main;
+        if (cam == null) return;
+ 
+        float cx = (mazeWidth  - 1) * tileSize / 2f;
+        float cz = (mazeHeight - 1) * tileSize / 2f;
+ 
+        float halfW = mazeWidth  * tileSize / 2f;
+        float halfH = mazeHeight * tileSize / 2f;
+ 
+        float fovRad = cam.fieldOfView * Mathf.Deg2Rad / 2f;
+ 
+        float distForHeight = halfH / Mathf.Tan(fovRad);
+        float distForWidth  = halfW / (Mathf.Tan(fovRad) * cam.aspect);
+ 
+        // Use whichever is larger so the whole maze fits, plus 10% padding
+        float camHeight = Mathf.Max(distForHeight, distForWidth) * 1.1f;
+ 
+        // Look straight down — works on all screen sizes
+        cam.transform.position = new Vector3(cx, camHeight, cz);
+        cam.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
     }
 }
