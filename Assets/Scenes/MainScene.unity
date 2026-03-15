@@ -452,6 +452,14 @@ MonoBehaviour:
   score: 0
   mazeRenderer: {fileID: 996278138}
   uiManager: {fileID: 79736162}
+  collectSound: {fileID: 8300000, guid: ab3576a506f5a4b03b3bae0613c6771a, type: 3}
+  fallSound: {fileID: 8300000, guid: e63cc7892a19d4c3eb14d56fbba6ba21, type: 3}
+  exitSound: {fileID: 8300000, guid: 60718b7c90e7e4516974c67bdbf0ab07, type: 3}
+  victorySound: {fileID: 8300000, guid: bddd137507a6c445cb3c19af4f402f9c, type: 3}
+  buttonSound: {fileID: 8300000, guid: 214e808dcc47747eb9f6a8ac00f10b31, type: 3}
+  musicClip: {fileID: 8300000, guid: 661422c5dff7849458b6bad9d93fbb6f, type: 3}
+  sfxVolume: 0.8
+  musicVolume: 0.4
 --- !u!1 &341607493
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +683,18 @@ MonoBehaviour:
       - m_Target: {fileID: 79736162}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnRestartButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 79736163}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayButtonSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1519,6 +1539,18 @@ MonoBehaviour:
       - m_Target: {fileID: 79736162}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnRestartButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 79736163}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayButtonSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

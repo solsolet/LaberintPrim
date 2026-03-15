@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Singleton: one GameManager exists at all times, accessible from anywhere
+    // Singleton: 1 GameManager, accessible from anywhere
     public static GameManager Instance { get; private set; }
 
     // ---------- Level configuration ----------
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         public int largeCollectables = 1;
     }
 
-    // Fill these in the Inspector (they are pre-set with defaults below)
+    // Filled in Inspector
     public LevelConfig[] levels = new LevelConfig[]
     {
         new LevelConfig { mazeWidth=11, mazeHeight=11, holeCount=2,  lives=3, smallCollectables=4, mediumCollectables=2, largeCollectables=1 },
@@ -38,7 +38,24 @@ public class GameManager : MonoBehaviour
     public MazeRenderer mazeRenderer;
     public UIManager    uiManager;
 
-    // -------------------------------------------------------
+    // ---------- Audio ----------
+    [Header("Audio clips (drag from Assets/Audio/)")]
+    public AudioClip collectSound;
+    public AudioClip fallSound;
+    public AudioClip exitSound;
+    public AudioClip victorySound;
+    public AudioClip buttonSound;
+ 
+    [Header("Background music")]
+    public AudioClip musicClip;
+ 
+    [Range(0f, 1f)] public float sfxVolume   = 0.8f;
+    [Range(0f, 1f)] public float musicVolume = 0.4f;
+ 
+    private AudioSource sfxSource;
+    private AudioSource musicSource;
+
+
 
     void Awake()
     {
@@ -49,10 +66,20 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        sfxSource             = gameObject.AddComponent<AudioSource>();
+        sfxSource.playOnAwake = false;
+        sfxSource.volume      = sfxVolume;
+ 
+        musicSource             = gameObject.AddComponent<AudioSource>();
+        musicSource.playOnAwake = false;
+        musicSource.loop        = true;
+        musicSource.volume      = musicVolume;
     }
 
     void Start()
     {
+        PlayMusic();
         LoadLevel(0);
     }
 
@@ -61,7 +88,7 @@ public class GameManager : MonoBehaviour
     {
         currentLevel = index;
         lives        = levels[index].lives;
-        // Do NOT reset score between levels — it accumulates!
+        // score between levels is accumulative
 
         mazeRenderer.BuildMaze(levels[index]);
         uiManager.Refresh();
@@ -72,16 +99,19 @@ public class GameManager : MonoBehaviour
     {
         score += points;
         uiManager.Refresh();
+        PlaySFX(collectSound);
     }
 
     // Called by HoleTrap.cs
     public void FallInHole()
     {
         lives--;
+        PlaySFX(fallSound);
         uiManager.Refresh();
 
         if (lives <= 0)
         {
+            // PlaySFX(gameOverSound);
             uiManager.ShowGameOver();
         }
         else
@@ -94,9 +124,12 @@ public class GameManager : MonoBehaviour
     // Called by ExitZone.cs
     public void ReachExit()
     {
+        PlaySFX(exitSound);
+
         if (currentLevel + 1 >= levels.Length)
         {
             // All 5 levels beaten!
+            PlaySFX(victorySound);
             uiManager.ShowVictory();
         }
         else
@@ -109,6 +142,7 @@ public class GameManager : MonoBehaviour
     // Called by UI "Restart" buttons
     public void Restart()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -118,5 +152,24 @@ public class GameManager : MonoBehaviour
         // TEMP: press N to skip to next level during testing — remove before final build
         if (Input.GetKeyDown(KeyCode.N))
             ReachExit();
+    }
+
+    // Call from every UI button's OnClick
+    public void PlayButtonSound()
+    {
+        PlaySFX(buttonSound);
+    }
+
+    void PlaySFX(AudioClip clip)
+    {
+        if (clip == null || sfxSource == null) return;
+        sfxSource.PlayOneShot(clip, sfxVolume);
+    }
+ 
+    void PlayMusic()
+    {
+        if (musicClip == null || musicSource == null) return;
+        musicSource.clip = musicClip;
+        musicSource.Play();
     }
 }
