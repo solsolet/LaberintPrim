@@ -19,7 +19,7 @@ Minijuego en Unity en el que el tablero se genere automáticamente mediante un a
 - [ ] Comparación con otro algoritmo (DFS, Kruskal).
 
 ## Demo
-Se puede ver la demo del proyecto en la carpeta de este zip como demo_LaberintoPrim.mp4. Cualquier problema con la versión entregada por Moodle (tanto del proyecto como del README) se puede usar el repositorio donde se encuentra alojada la práctica: [https://github.com/solsolet/LaberintPrim.git](https://github.com/solsolet/LaberintPrim.git).
+Se puede ver la demo del proyecto en la carpeta de este zip como [demo_LaberintoPrim.mp4](demo_LaberintoPrim.mp4). Cualquier problema con la versión entregada por Moodle (tanto del proyecto como del README) se puede usar el repositorio donde se encuentra alojada la práctica: [https://github.com/solsolet/LaberintPrim.git](https://github.com/solsolet/LaberintPrim.git).
 
 Para probar la aplicación directamente en un dispositivo **Android** (SDK <= 35) se puede instalar la APK: [LaberintPrim.apk](LaberintPrim.apk) o descargándola de [GitHub](https://github.com/solsolet/LaberintPrim/releases/tag/Android).
 
@@ -120,7 +120,9 @@ Los caracteres emoji (Unicode > U+FFFF) no están incluidos en la fuente `Quando
 La pelota atravesaba los agujeros sin perder vida. El script `HoleTrap.cs` comprueba `other.CompareTag("Ball")` en `OnTriggerEnter`, pero el prefab `BallPrefab` tenía el tag establecido a `Untagged`. Al ser la pelota instanciada en tiempo de ejecución con `Instantiate`, el tag debe estar definido en el prefab, no en un objeto de escena. Solución: abrir `BallPrefab` en modo edición de prefab y cambiar el tag a `Ball` antes de guardar. Adicionalmente, el collider del `HolePrefab` tenía `Is Trigger` desmarcado en una revisión intermedia, lo que hacía que el agujero bloqueara físicamente el paso en lugar de detectar la colisión. Solución: verificar que `Is Trigger` esté activo en el collider del agujero y que `HoleTrap.cs` esté añadido como componente al prefab.
 
 ## Assets
-Los assets de sonido de la carpeta `Audio` no son propios, se han descargado de [Freesound](freesound.org). Están bajo la licencia de Creatives Commons 0:
+Los _prefabs_ y las texturas han sido elaboradas desde 0.
+
+Los assets de **sonido** de la carpeta `Audio` no son propios, se han descargado de [Freesound](freesound.org). Están bajo la licencia de Creatives Commons 0:
 - Collectionable collect: [https://freesound.org/s/646672/](https://freesound.org/s/646672/)
 - Woosh: [https://freesound.org/s/742833/](https://freesound.org/s/742833/)
 - Victory: [https://freesound.org/s/580310/](https://freesound.org/s/580310/)
