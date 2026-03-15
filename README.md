@@ -11,7 +11,7 @@ Minijuego en Unity en el que el tablero se genere automáticamente mediante un a
 ### Opcional
 - [x] Animaciones
 - [x] Sonidos
-- [ ] Interfaz mejorada. <!--TODO: Cambiar palabras label por emojis-->
+- [x] Interfaz mejorada. <!--TODO: Cambiar palabras label por emojis-->
 - [x] Efectos visuales.
 - [ ] Minimapa.
 - [x] Cámara dinámica
@@ -19,7 +19,11 @@ Minijuego en Unity en el que el tablero se genere automáticamente mediante un a
 - [ ] Comparación con otro algoritmo (DFS, Kruskal).
 
 ## Demo
-Se puede ver la demo del proyecto en la carpeta de este zip como demo_LaberintoPrim.mp4. Cualquier problema con la versión entregada por Moodle (tanto del proyecto como del README) se puede usar el repositorio donde se encuentra alojada la práctica: [https://github.com/solsolet/LaberintPrim.git](https://github.com/solsolet/LaberintPrim.git). Para probar la aplicación directamente en un dispositivo **Android** (SDK <= 35) se puede instalar la APK: [LaberintPrim.apk]() o descargándola de [GitHub]().
+Se puede ver la demo del proyecto en la carpeta de este zip como demo_LaberintoPrim.mp4. Cualquier problema con la versión entregada por Moodle (tanto del proyecto como del README) se puede usar el repositorio donde se encuentra alojada la práctica: [https://github.com/solsolet/LaberintPrim.git](https://github.com/solsolet/LaberintPrim.git).
+
+Para probar la aplicación directamente en un dispositivo **Android** (SDK <= 35) se puede instalar la APK: [LaberintPrim.apk](LaberintPrim.apk) o descargándola de [GitHub](https://github.com/solsolet/LaberintPrim/releases/tag/Android).
+
+Y para probarla en un dispositivo Windows (Intel 64-bit architecture) se puede usar el zip: [LaberintPrim_Windows](LaberintPrim_Windows.zip) o descargándola de [GitHub](https://github.com/solsolet/LaberintPrim/releases/tag/Windows).
 
 ## 📋 Resumen de la arquitectura
 ```bash
