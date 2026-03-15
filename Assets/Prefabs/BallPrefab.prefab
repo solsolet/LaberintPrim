@@ -153,5 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec2f7904b61d440daf90d812d3d696c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallController
-  force: 20
-  maxSpeed: 12
+  force: 18
+  maxSpeed: 11
+  gyroSensitivity: 2.5
