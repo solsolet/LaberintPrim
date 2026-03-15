@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4704797839681939051}
   - component: {fileID: 6288204993441046634}
   - component: {fileID: 3254972174464629632}
+  - component: {fileID: 2691174341043089302}
   m_Layer: 0
   m_Name: HolePrefab
   m_TagString: Hole
@@ -149,3 +150,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d04eff193c5b4ba1b1d85e28ed57491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoleTrap
+--- !u!114 &2691174341043089302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4858646940405446688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4e7a01a12104e7397d06ad17a69ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoleEffect
+  particleCount: 15
+  particleMaterial: {fileID: 2100000, guid: 0c00d12878ac1449f84cd4347404f05a, type: 2}
