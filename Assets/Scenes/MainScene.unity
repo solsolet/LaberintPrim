@@ -1562,6 +1562,7 @@ GameObject:
   - component: {fileID: 1849991709}
   - component: {fileID: 1849991708}
   - component: {fileID: 1849991707}
+  - component: {fileID: 1849991711}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -1656,6 +1657,18 @@ RectTransform:
   m_AnchoredPosition: {x: -540, y: 960}
   m_SizeDelta: {x: 1080, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1849991711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849991706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a20c1e55ff44f47807720fb8b4978e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SafeArea
 --- !u!1 &1884129282
 GameObject:
   m_ObjectHideFlags: 0
