@@ -3,18 +3,18 @@ Minijuego en Unity en el que el tablero se genere automáticamente mediante un a
 
 ## TODO
 ### Básico
-- [x] Implementar un generador procedural de laberintos.
-- [x] Construir un tablero jugable a partir del laberinto generado.
-- [x] Implementar físicas, sistema de puntuación y progresión de dificultad.
-- [x] Integrar control mediante teclado (PC) o giroscopio (en móvil).
+- [x] Implementar un generador procedural de laberintos
+- [x] Construir un tablero jugable a partir del laberinto generado
+- [x] Implementar físicas, sistema de puntuación y progresión de dificultad
+- [x] Integrar control mediante teclado (PC) o giroscopio (en móvil)
 
 ### Opcional
-- [x] Animaciones.
-- [ ] Sonidos. <!--TODO: poner sonidos al ganar/perder click button, coger coleccionable, fondo-->
+- [x] Animaciones
+- [x] Sonidos
 - [ ] Interfaz mejorada. <!--TODO: Cambiar palabras label por emojis-->
-- [ ] Efectos visuales.
+- [x] Efectos visuales.
 - [ ] Minimapa.
-- [ ] Cámara dinámica. <!--TODO: hacer qeu la camara siga a la pelota de lejos-->
+- [x] Cámara dinámica
 - [ ] Generación del laberinto paso a paso visualizada.
 - [ ] Comparación con otro algoritmo (DFS, Kruskal).
 
@@ -47,6 +47,9 @@ Assets/
     ├── HoleTrap.cs                # Al entrar en contacto con la pelota llama a GameManager.FallInHole()
     ├── ExitZone.cs                # Al entrar en contacto con la pelota llama a GameManager.ReachExit()
     ├── FloatAnimation.cs          # Animación de flotación y rotación para los coleccionables
+    ├── CollectEffect.cs   # Burst de partículas al recoger un coleccionable
+    ├── HoleEffect.cs      # Burst de partículas al caer en un agujero  
+    ├── CameraFollow.cs    # Cámara que sigue la pelota con transición zoom-out/in
     └── SafeArea.cs                # Ajusta el HUD al área segura del dispositivo (notch, barra inferior)
 ```
 
@@ -104,6 +107,9 @@ El `Canvas Scaler` estaba en modo `Constant Pixel Size`, por lo que los elemento
  
 **Espacio muerto en la parte superior (notch)**
 En dispositivos con _notch_ (como es el caso del dispositivo que se ha usado para pruebas), el SO reserva una franja superior y la UI quedaba desplazada hacia arriba, dejando las etiquetas parcialmente ocultas. Solución: añadir el script `SafeArea.cs` al objeto HUD, que lee `Screen.safeArea` en cada frame y ajusta los anchors del `RectTransform` para que el contenido quede siempre dentro del área visible.
+
+**Los emojis no se renderizaban**
+Los caracteres emoji (Unicode > U+FFFF) no están incluidos en la fuente `Quando-Regular SDF` ni en los fallbacks disponibles. TMP los sustituía por □. Solución: reemplazar los emoji por símbolos Unicode del plano básico que sí están presentes en cualquier fuente estándar: ★ (U+2605) para puntos, ♥/♡ (U+2665/U+2661) para vidas y ◆ (U+25C6) para el nivel.
 
 ### Con la lógica del juego
 **Los agujeros no triggereaban**
