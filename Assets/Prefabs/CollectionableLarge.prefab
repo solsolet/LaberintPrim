@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3109208833297461597}
   - component: {fileID: 4204020784498730749}
   - component: {fileID: 1767477871037785403}
+  - component: {fileID: 4115429252629768959}
   m_Layer: 0
   m_Name: CollectionableLarge
   m_TagString: Collectionable
@@ -128,3 +129,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectable
   points: 50
+--- !u!114 &4115429252629768959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4998419501180575656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32103e7ffa42413783fd7aa4713bcfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatAnimation
+  amplitude: 0.15
+  frequency: 1.7
+  rotationSpeed: 90

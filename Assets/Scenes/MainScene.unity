@@ -157,7 +157,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -210,13 +210,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 32499557}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.44013008, y: -0.48374942, z: 0.30818236, w: 0.6908659}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 65, y: -70, z: 0}
 --- !u!114 &32499560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,7 +625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -157}
+  m_AnchoredPosition: {x: 0, y: -93}
   m_SizeDelta: {x: 361.0479, y: 129.6859}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &773681800
@@ -936,6 +936,7 @@ GameObject:
   - component: {fileID: 1014277612}
   - component: {fileID: 1014277614}
   - component: {fileID: 1014277613}
+  - component: {fileID: 1014277615}
   m_Layer: 5
   m_Name: VictoyPanel
   m_TagString: Untagged
@@ -1002,6 +1003,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014277611}
   m_CullTransparentMesh: 1
+--- !u!114 &1014277615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014277611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d77ce27317c43f2991a2a679f12950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelAutoLayout
+  titleText: {fileID: 1571622953}
+  restartButton: {fileID: 773681800}
+  subtitleText: {fileID: 0}
 --- !u!1 &1403486155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1054,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 850}
   m_SizeDelta: {x: 300, y: 50}
-  m_Pivot: {x: 1.3, y: 0.5}
+  m_Pivot: {x: 1.5, y: 0.5}
 --- !u!114 &1403486157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1175,7 +1191,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 850}
   m_SizeDelta: {x: 300, y: 50}
-  m_Pivot: {x: -0.3, y: 0.5}
+  m_Pivot: {x: -0.5, y: 0.5}
 --- !u!114 &1462585944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,7 +1362,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281965109
+    rgba: 4282153017
   m_fontColor: {r: 0.2247241, g: 0.4716981, b: 0.23450525, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1453,7 +1469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -157}
+  m_AnchoredPosition: {x: 0, y: -93}
   m_SizeDelta: {x: 361.0479, y: 129.6859}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1758256648
@@ -1817,6 +1833,7 @@ GameObject:
   - component: {fileID: 1931198877}
   - component: {fileID: 1931198879}
   - component: {fileID: 1931198878}
+  - component: {fileID: 1931198880}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -1883,6 +1900,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931198876}
   m_CullTransparentMesh: 1
+--- !u!114 &1931198880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931198876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d77ce27317c43f2991a2a679f12950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelAutoLayout
+  titleText: {fileID: 341607495}
+  restartButton: {fileID: 1758256648}
+  subtitleText: {fileID: 0}
 --- !u!1 &1978897617
 GameObject:
   m_ObjectHideFlags: 0
