@@ -29,6 +29,8 @@ public class MazeRenderer : MonoBehaviour
     // ---------- MazeGenerator reference ----------
     private MazeGenerator generator;
 
+
+
     void Awake()
     {
         generator = GetComponent<MazeGenerator>();
@@ -90,6 +92,7 @@ public class MazeRenderer : MonoBehaviour
         int idx = 0;
 
         // ---- Place holes ----
+        // Unsolvable if a hole is in the correct path
         for (int i = 0; i < config.holeCount && idx < freeTiles.Count; i++, idx++)
         {
             Vector3 hPos = new Vector3(freeTiles[idx].x * tileSize, 0.05f,
@@ -174,8 +177,8 @@ public class MazeRenderer : MonoBehaviour
         cam.transform.position = new Vector3(cx, dist * 0.85f, cz - dist * 0.15f);
         cam.transform.LookAt(new Vector3(cx, 0, cz));
     }*/
+
     // Positions the camera directly overhead so the full maze fits on screen.
-    // Works correctly on both portrait mobile and landscape PC screens.
     void PositionCamera()
     {
         Camera cam = Camera.main;

@@ -79,6 +79,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Warm up the audio engine to eliminate first-play delay
+        sfxSource.volume = 0f;
+        sfxSource.PlayOneShot(buttonSound);
+        sfxSource.volume = sfxVolume;
+        
         PlayMusic();
         LoadLevel(0);
     }
